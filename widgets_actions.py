@@ -1,22 +1,76 @@
+import numpy as np
+from PySide2.QtWidgets import QMessageBox
+
+
 class WidgetActions:
     def __init__(self, parent):
         self.parent = parent
 
     # Check input validation
     def validate_input(self, function_str, min_value_str, max_value_str):
-        print("Validate input")
+        # Check if the function is valid
+        try:
+            x = 0
+            eval(function_str)
+        except (SyntaxError, NameError, ZeroDivisionError):
+            return False, "Invalid function. Please enter a valid mathematical function."
+
+        # Check if min and max values are valid numbers
+        try:
+            min_value = float(min_value_str)
+            max_value = float(max_value_str)
+        except ValueError:
+            return False, "Invalid min/max values. Please enter valid numbers."
+
+        # Check if min_value is smaller than max_value
+        if min_value >= max_value:
+            return False, "Invalid min/max values. Max value should be greater than min value."
+
+        return True, ""
 
     # To plot a mathematical function on a canvas using matplotlib
     def plot(self):
-        print("Plot")
+        function_str = self.parent.function_plotter.function_input.text()
+        function_str = function_str.replace('^', '**')  # Replace ^ with ** for exponentiation
+        min_value_str = self.parent.function_plotter.min_input.text()
+        max_value_str = self.parent.function_plotter.max_input.text()
+
+        valid_input, error_message = self.validate_input(function_str, min_value_str, max_value_str)
+
+        if valid_input:
+            x = np.linspace(float(min_value_str), float(max_value_str), 1000)
+            y = eval(function_str)
+
+            self.parent.figure.clear()
+            ax = self.parent.figure.add_subplot(111)
+            ax.plot(x, y)
+            self.parent.canvas.draw()
+        else:
+            QMessageBox.critical(self.parent, "Invalid Input", error_message, QMessageBox.Ok)
 
     # Clear the existing figure and prepare for a new plot
     def new_plot(self):
-        print("New plot")
+        self.parent.figure.clear()
+        self.parent.canvas.draw()
 
     # To add subplot on the canvas without erasing the previous plot
     def add_subplot(self):
-        print("Add subplot")
+        function_str = self.parent.function_plotter.function_input.text()
+        function_str = function_str.replace('^', '**')  # Replace ^ with ** for exponentiation
+        min_value_str = self.parent.function_plotter.min_input.text()
+        max_value_str = self.parent.function_plotter.max_input.text()
+
+        valid_input, error_message = self.validate_input(function_str, min_value_str, max_value_str)
+
+        if valid_input:
+            x = np.linspace(float(min_value_str), float(max_value_str), 1000)
+            y = eval(function_str)
+
+            ax = self.parent.figure.gca()
+            ax.plot(x, y, color='red')
+            self.parent.canvas.draw()
+        else:
+            QMessageBox.critical(self.parent, "Invalid Input", error_message, QMessageBox.Ok)
 
     # Save the plot as an image file with the chosen file name
     def save_image(self):
