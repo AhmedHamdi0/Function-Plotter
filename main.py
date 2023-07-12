@@ -29,6 +29,15 @@ class MainWindow(QMainWindow):
         self.main_layout.addWidget(self.canvas)
         self.main_layout.addWidget(self.plot_button)
 
+        self.function_plotter.plot_button.clicked.connect(self.widget_actions.plot)
+        self.toolbar.new_plot_action.triggered.connect(self.widget_actions.new_plot)
+        self.toolbar.add_plot_action.triggered.connect(self.widget_actions.add_plot)
+        self.toolbar.save_image_action.triggered.connect(self.widget_actions.save_image)
+        self.toolbar.export_pdf_action.triggered.connect(self.widget_actions.export_pdf)
+        self.toolbar.zoom_in_action.triggered.connect(self.widget_actions.zoom_in)
+        self.toolbar.zoom_out_action.triggered.connect(self.widget_actions.zoom_out)
+        self.toolbar.exit_action.triggered.connect(self.widget_actions.exit_application)
+
 
 def main():
     app = QApplication(sys.argv)
