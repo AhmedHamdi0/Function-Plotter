@@ -1,7 +1,7 @@
 from os.path import expanduser
-
 import numpy as np
 from PySide2.QtWidgets import QMessageBox, QFileDialog
+from numpy import random
 
 
 class WidgetActions:
@@ -69,7 +69,9 @@ class WidgetActions:
             y = eval(function_str)
 
             ax = self.parent.figure.gca()
-            ax.plot(x, y, color='red')
+            colors = ['red', 'blue', 'green', 'orange', 'purple', 'cyan', 'magenta', 'yellow']
+            color = random.choice(colors)
+            ax.plot(x, y, color=color)
             self.parent.canvas.draw()
         else:
             QMessageBox.critical(self.parent, "Invalid Input", error_message, QMessageBox.Ok)

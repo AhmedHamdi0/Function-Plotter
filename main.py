@@ -5,6 +5,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from toolbar import Toolbar
 from function_plotter import FunctionPlotter
+from widgets_actions import WidgetActions
 
 
 class MainWindow(QMainWindow):
@@ -18,6 +19,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.main_widget)
         self.main_layout = QVBoxLayout(self.main_widget)
 
+        self.widget_actions = WidgetActions(self)
+
         self.toolbar = Toolbar(self)
         self.function_plotter = FunctionPlotter(self)
         self.figure = Figure()
@@ -29,9 +32,9 @@ class MainWindow(QMainWindow):
         self.main_layout.addWidget(self.canvas)
         self.main_layout.addWidget(self.plot_button)
 
-        self.function_plotter.plot_button.clicked.connect(self.widget_actions.plot)
+        self.plot_button.clicked.connect(self.widget_actions.plot)
         self.toolbar.new_plot_action.triggered.connect(self.widget_actions.new_plot)
-        self.toolbar.add_plot_action.triggered.connect(self.widget_actions.add_plot)
+        self.toolbar.add_subplot_action.triggered.connect(self.widget_actions.add_subplot)
         self.toolbar.save_image_action.triggered.connect(self.widget_actions.save_image)
         self.toolbar.export_pdf_action.triggered.connect(self.widget_actions.export_pdf)
         self.toolbar.zoom_in_action.triggered.connect(self.widget_actions.zoom_in)
