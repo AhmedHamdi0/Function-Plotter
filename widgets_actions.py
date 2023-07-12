@@ -1,5 +1,7 @@
+from os.path import expanduser
+
 import numpy as np
-from PySide2.QtWidgets import QMessageBox
+from PySide2.QtWidgets import QMessageBox, QFileDialog
 
 
 class WidgetActions:
@@ -74,20 +76,36 @@ class WidgetActions:
 
     # Save the plot as an image file with the chosen file name
     def save_image(self):
-        print("Save image")
+        default_dir = expanduser("~/Downloads")
+        file_name, _ = QFileDialog.getSaveFileName(self.parent, "Save Image", default_dir,
+                                                   "PNG Files (*.png);;All Files (*)")
+
+        if file_name:
+            self.parent.figure.savefig(file_name)
 
     # Export the plot as a PDF file with the chosen file name
     def export_pdf(self):
-        print("Export PDF")
+        default_dir = expanduser("~/Downloads")
+        file_name, _ = QFileDialog.getSaveFileName(self.parent, "Export PDF", default_dir,
+                                                   "PDF Files (*.pdf);;All Files (*)")
+
+        if file_name:
+            self.parent.figure.savefig(file_name, format='pdf')
 
     # Zoom in of the plot by decreasing the x-axis and y-axis limits.
     def zoom_in(self):
-        print("Zoom in")
+        ax = self.parent.figure.gca()
+        ax.set_xlim(0.9 * ax.get_xlim()[0], 0.9 * ax.get_xlim()[1])
+        ax.set_ylim(0.9 * ax.get_ylim()[0], 0.9 * ax.get_ylim()[1])
+        self.parent.canvas.draw()
 
     # Zoom out of the plot by increasing the x-axis and y-axis limits.
     def zoom_out(self):
-        print("Zoom out")
+        ax = self.parent.figure.gca()
+        ax.set_xlim(1.1 * ax.get_xlim()[0], 1.1 * ax.get_xlim()[1])
+        ax.set_ylim(1.1 * ax.get_ylim()[0], 1.1 * ax.get_ylim()[1])
+        self.parent.canvas.draw()
 
     # Exit the application
     def exit_application(self):
-        print("Exit")
+        self.parent.close()
