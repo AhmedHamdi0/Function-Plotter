@@ -12,7 +12,7 @@ class FunctionPlotter(QWidget):
         self.init_plotter()
 
     def init_plotter(self):
-        plotter_layout = QVBoxLayout()
+        plotter_layout = QVBoxLayout(self)
 
         function_layout = QHBoxLayout()
         function_label = QLabel("Enter function (e.g., 5*x^3 + 2*x):", self)
