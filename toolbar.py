@@ -36,3 +36,11 @@ class Toolbar(QToolBar):
 
         self.exit_action = QAction(QIcon("Assets/cross-script.png"), "Exit App", self)
         self.exit_action.setCheckable(True)
+
+        self.addAction(self.new_plot_action)
+        self.addAction(self.add_subplot_action)
+        self.addAction(self.save_image_action)
+        self.addAction(self.export_pdf_action)
+        self.addAction(self.zoom_in_action)
+        self.addAction(self.zoom_out_action)
+        self.addAction(self.exit_action)
