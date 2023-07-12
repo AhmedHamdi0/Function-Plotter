@@ -1,6 +1,6 @@
 import sys
 import qdarkstyle
-from PySide2.QtWidgets import QMainWindow, QApplication, QWidget, QVBoxLayout
+from PySide2.QtWidgets import QMainWindow, QApplication, QWidget, QVBoxLayout, QPushButton
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from toolbar import Toolbar
@@ -20,13 +20,14 @@ class MainWindow(QMainWindow):
 
         self.toolbar = Toolbar(self)
         self.function_plotter = FunctionPlotter(self)
+        self.figure = Figure()
+        self.canvas = FigureCanvas(self.figure)
+        self.plot_button = QPushButton("Plot", self)
 
         self.main_layout.addWidget(self.toolbar)
         self.main_layout.addWidget(self.function_plotter)
-
-        self.figure = Figure()
-        self.canvas = FigureCanvas(self.figure)
         self.main_layout.addWidget(self.canvas)
+        self.main_layout.addWidget(self.plot_button)
 
 
 def main():

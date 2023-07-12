@@ -7,7 +7,6 @@ class FunctionPlotter(QWidget):
         self.function_input = None
         self.min_input = None
         self.max_input = None
-        self.plot_button = None
 
         self.init_plotter()
 
@@ -32,9 +31,5 @@ class FunctionPlotter(QWidget):
         value_x_layout.addWidget(max_label)
         value_x_layout.addWidget(self.max_input)
 
-        self.plot_button = QPushButton("Plot", self)
-
         plotter_layout.addLayout(function_layout)
         plotter_layout.addLayout(value_x_layout)
-        plotter_layout.addWidget(self.plot_button)
-
