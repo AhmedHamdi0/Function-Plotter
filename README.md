@@ -21,6 +21,7 @@
 ## Project Hierarchy
 ```
 ├── 🐍 main.py                     # Main entry point of the application
+├── 🐍 main_window.py              # Contains the main window for the whole app sets up the user interface
 ├── 🐍 toolbar.py                  # Contains the Toolbar class for the GUI toolbar
 ├── 🐍 function_plotter.py         # Contains the FunctionPlotter class for inputting and plotting mathematical functions
 ├── 🐍 widgets_actions.py          # Contains the WidgetActions class with various actions for the application
@@ -41,7 +42,8 @@
 
 The project follows a structured organization to maintain code modularity and separation of concerns. Here is an overview of the project structure and the purpose of each file:
 
-- `🐍 main.py`: The main entry point of the application. It initializes the main window and sets up the user interface.
+- `🐍 main.py`: The main entry point of the application.
+- `🐍 main_window.py`: It initializes the main window and sets up the user interface.
 - `🐍 toolbar.py`: Contains the implementation of the toolbar widget, including actions for various functionality like new plot, add subplot, save image, etc.
 - `🐍 function_plotter.py`: Defines the function plotter widget that allows users to input mathematical functions and set the range of the x-axis.
 - `🐍 widgets_actions.py`: Implements the actions performed by the widgets, such as plotting a function, saving images, zooming in/out, etc.
