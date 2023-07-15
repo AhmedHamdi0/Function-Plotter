@@ -4,6 +4,7 @@ from PySide2.QtWidgets import QMessageBox, QFileDialog
 from numpy import random
 
 
+# Define a class for handling widget actions
 class WidgetActions:
     def __init__(self, parent):
         self.parent = parent

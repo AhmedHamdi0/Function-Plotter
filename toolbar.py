@@ -2,9 +2,12 @@ from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QToolBar, QAction
 
 
+# Define a custom toolbar class
 class Toolbar(QToolBar):
     def __init__(self, parent):
         super(Toolbar, self).__init__(parent)
+
+        # Initialize toolbar actions
         self.new_plot_action = None
         self.add_subplot_action = None
         self.save_image_action = None
@@ -13,9 +16,12 @@ class Toolbar(QToolBar):
         self.zoom_out_action = None
         self.exit_action = None
 
+        # Set up the toolbar
         self.init_toolbar()
 
+    # Set up the toolbar
     def init_toolbar(self):
+        # Create and configure actions with icons and labels
         self.new_plot_action = QAction(QIcon("Assets/function.png"), "New Plot", self)
         self.new_plot_action.setCheckable(True)
 
@@ -37,6 +43,7 @@ class Toolbar(QToolBar):
         self.exit_action = QAction(QIcon("Assets/cross-script.png"), "Exit App", self)
         self.exit_action.setCheckable(True)
 
+        # Add actions to the toolbar
         self.addAction(self.new_plot_action)
         self.addAction(self.add_subplot_action)
         self.addAction(self.save_image_action)
