@@ -38,10 +38,15 @@ class MainWindow(QMainWindow):
         self.main_layout.addWidget(self.canvas)
         self.main_layout.addWidget(self.plot_button)
 
+        # Creating variables for widgets actions parameters
+        function_str = self.function_plotter.function_input.text()
+        min_value = self.function_plotter.min_input.text()
+        max_value = self.function_plotter.max_input.text()
+
         # Connect signals to slots for handling actions
-        self.plot_button.clicked.connect(self.widget_actions.plot)
+        self.plot_button.clicked.connect(lambda: self.widget_actions.plot(function_str, min_value, max_value))
         self.toolbar.new_plot_action.triggered.connect(self.widget_actions.new_plot)
-        self.toolbar.add_subplot_action.triggered.connect(self.widget_actions.add_subplot)
+        self.toolbar.add_subplot_action.triggered.connect(lambda: self.widget_actions.add_subplot(function_str, min_value, max_value))
         self.toolbar.save_image_action.triggered.connect(self.widget_actions.save_image)
         self.toolbar.export_pdf_action.triggered.connect(self.widget_actions.export_pdf)
         self.toolbar.zoom_in_action.triggered.connect(self.widget_actions.zoom_in)

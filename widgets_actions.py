@@ -4,41 +4,39 @@ from PySide2.QtWidgets import QMessageBox, QFileDialog
 from numpy import random
 
 
+# Check input validation
+def validate_input(function_str, min_value_str, max_value_str):
+    # Check if the function is valid
+    try:
+        x = 0
+        eval(function_str)
+    except (SyntaxError, NameError, ZeroDivisionError):
+        return False, "Invalid function. Please enter a valid mathematical function."
+
+    # Check if min and max values are valid numbers
+    try:
+        min_value = float(min_value_str)
+        max_value = float(max_value_str)
+    except ValueError:
+        return False, "Invalid min/max values. Please enter valid numbers."
+
+    # Check if min_value is smaller than max_value
+    if min_value >= max_value:
+        return False, "Invalid min/max values. Max value should be greater than min value."
+
+    return True, ""
+
+
 # Define a class for handling widget actions
 class WidgetActions:
     def __init__(self, parent):
         self.parent = parent
 
-    # Check input validation
-    def validate_input(self, function_str, min_value_str, max_value_str):
-        # Check if the function is valid
-        try:
-            x = 0
-            eval(function_str)
-        except (SyntaxError, NameError, ZeroDivisionError):
-            return False, "Invalid function. Please enter a valid mathematical function."
-
-        # Check if min and max values are valid numbers
-        try:
-            min_value = float(min_value_str)
-            max_value = float(max_value_str)
-        except ValueError:
-            return False, "Invalid min/max values. Please enter valid numbers."
-
-        # Check if min_value is smaller than max_value
-        if min_value >= max_value:
-            return False, "Invalid min/max values. Max value should be greater than min value."
-
-        return True, ""
-
     # To plot a mathematical function on a canvas using matplotlib
-    def plot(self):
-        function_str = self.parent.function_plotter.function_input.text()
+    def plot(self, function_str, min_value_str, max_value_str):
         function_str = function_str.replace('^', '**')  # Replace ^ with ** for exponentiation
-        min_value_str = self.parent.function_plotter.min_input.text()
-        max_value_str = self.parent.function_plotter.max_input.text()
 
-        valid_input, error_message = self.validate_input(function_str, min_value_str, max_value_str)
+        valid_input, error_message = validate_input(function_str, min_value_str, max_value_str)
 
         if valid_input:
             x = np.linspace(float(min_value_str), float(max_value_str), 1000)
@@ -57,13 +55,10 @@ class WidgetActions:
         self.parent.canvas.draw()
 
     # To add subplot on the canvas without erasing the previous plot
-    def add_subplot(self):
-        function_str = self.parent.function_plotter.function_input.text()
+    def add_subplot(self, function_str, min_value_str, max_value_str):
         function_str = function_str.replace('^', '**')  # Replace ^ with ** for exponentiation
-        min_value_str = self.parent.function_plotter.min_input.text()
-        max_value_str = self.parent.function_plotter.max_input.text()
 
-        valid_input, error_message = self.validate_input(function_str, min_value_str, max_value_str)
+        valid_input, error_message = validate_input(function_str, min_value_str, max_value_str)
 
         if valid_input:
             x = np.linspace(float(min_value_str), float(max_value_str), 1000)
@@ -79,7 +74,7 @@ class WidgetActions:
 
     # Save the plot as an image file with the chosen file name
     def save_image(self):
-        default_dir = expanduser("~/Downloads")
+        default_dir = expanduser("~/Documents")
         file_name, _ = QFileDialog.getSaveFileName(self.parent, "Save Image", default_dir,
                                                    "PNG Files (*.png);;All Files (*)")
 
@@ -88,7 +83,7 @@ class WidgetActions:
 
     # Export the plot as a PDF file with the chosen file name
     def export_pdf(self):
-        default_dir = expanduser("~/Downloads")
+        default_dir = expanduser("~/Documents")
         file_name, _ = QFileDialog.getSaveFileName(self.parent, "Export PDF", default_dir,
                                                    "PDF Files (*.pdf);;All Files (*)")
 
