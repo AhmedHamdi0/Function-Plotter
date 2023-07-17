@@ -4,7 +4,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from toolbar import Toolbar
 from function_plotter import FunctionPlotter
-from widgets_actions import WidgetActions
+from widgets_actions import *
 
 
 # Define the main application window
@@ -25,7 +25,6 @@ class MainWindow(QMainWindow):
         self.main_layout = QVBoxLayout(self.main_widget)
 
         # Create instances of the different components
-        self.widget_actions = WidgetActions(self)
         self.toolbar = Toolbar(self)
         self.function_plotter = FunctionPlotter(self)
         self.figure = Figure()
@@ -42,23 +41,23 @@ class MainWindow(QMainWindow):
         self.plot_button.clicked.connect(self.on_plot_button_clicked)
         self.toolbar.new_plot_action.triggered.connect(self.on_new_plot_action_triggered)
         self.toolbar.add_subplot_action.triggered.connect(self.on_add_subplot_action_triggered)
-        self.toolbar.save_image_action.triggered.connect(self.widget_actions.save_image)
-        self.toolbar.export_pdf_action.triggered.connect(self.widget_actions.export_pdf)
-        self.toolbar.zoom_in_action.triggered.connect(self.widget_actions.zoom_in)
-        self.toolbar.zoom_out_action.triggered.connect(self.widget_actions.zoom_out)
-        self.toolbar.exit_action.triggered.connect(self.widget_actions.exit_application)
+        self.toolbar.save_image_action.triggered.connect(lambda: save_image(self))
+        self.toolbar.export_pdf_action.triggered.connect(lambda: export_pdf(self))
+        self.toolbar.zoom_in_action.triggered.connect(lambda: zoom_in(self))
+        self.toolbar.zoom_out_action.triggered.connect(lambda: zoom_out(self))
+        self.toolbar.exit_action.triggered.connect(lambda: exit_application(self))
 
     def on_plot_button_clicked(self):
         function_str = self.function_plotter.function_input.text()
         min_value_str = self.function_plotter.min_input.text()
         max_value_str = self.function_plotter.max_input.text()
-        self.widget_actions.plot(function_str, min_value_str, max_value_str)
+        plot(self, function_str, min_value_str, max_value_str)
 
     def on_new_plot_action_triggered(self):
-        self.widget_actions.new_plot()
+        new_plot(self)
 
     def on_add_subplot_action_triggered(self):
         function_str = self.function_plotter.function_input.text()
         min_value_str = self.function_plotter.min_input.text()
         max_value_str = self.function_plotter.max_input.text()
-        self.widget_actions.add_subplot(function_str, min_value_str, max_value_str)
+        add_subplot(self, function_str, min_value_str, max_value_str)
