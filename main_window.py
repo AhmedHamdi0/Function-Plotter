@@ -1,4 +1,7 @@
+import os
+
 import qdarkstyle
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -13,7 +16,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         # Set the application theme to dark using QDarkStyle
-        self.setStyleSheet(qdarkstyle.load_stylesheet_pyside2())
+        # self.setStyleSheet(qdarkstyle.load_stylesheet_pyside2())
 
         # Set window properties
         self.setWindowTitle("Function Plotter")
