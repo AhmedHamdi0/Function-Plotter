@@ -33,12 +33,8 @@ class WidgetActions:
         self.parent = parent
 
     # To plot a mathematical function on a canvas using matplotlib
-    def plot(self):
-        function_str = self.parent.function_plotter.function_input.text()
+    def plot(self, function_str, min_value_str, max_value_str):
         function_str = function_str.replace('^', '**')  # Replace ^ with ** for exponentiation
-        min_value_str = self.parent.function_plotter.min_input.text()
-        max_value_str = self.parent.function_plotter.max_input.text()
-
         valid_input, error_message = validate_input(function_str, min_value_str, max_value_str)
 
         if valid_input:
@@ -58,12 +54,8 @@ class WidgetActions:
         self.parent.canvas.draw()
 
     # To add subplot on the canvas without erasing the previous plot
-    def add_subplot(self):
-        function_str = self.parent.function_plotter.function_input.text()
+    def add_subplot(self, function_str, min_value_str, max_value_str):
         function_str = function_str.replace('^', '**')  # Replace ^ with ** for exponentiation
-        min_value_str = self.parent.function_plotter.min_input.text()
-        max_value_str = self.parent.function_plotter.max_input.text()
-
         valid_input, error_message = validate_input(function_str, min_value_str, max_value_str)
 
         if valid_input:

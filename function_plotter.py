@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout
+from PySide2.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QHBoxLayout
 
 
 # Define a custom QWidget class for the function plotter
