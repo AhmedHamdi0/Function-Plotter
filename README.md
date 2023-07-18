@@ -20,10 +20,7 @@
 
 
 ## Demo Video
-
-https://github.com/AhmedHamdi0/creative-agency/assets/119865529/43867742-e232-42e4-814d-56fe7f060ee6
-
-
+https://github.com/AhmedHamdi0/Function-Plotter/assets/119865529/c7df1463-0a7a-4687-914c-bed4f7852adb
 
 
 ## Screenshots
