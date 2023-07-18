@@ -19,9 +19,6 @@
 > 🔹 Responsive and user-friendly graphical user interface (GUI). 🖥️
 
 
-## Demo Video
-https://github.com/AhmedHamdi0/Function-Plotter/assets/119865529/c7df1463-0a7a-4687-914c-bed4f7852adb
-
 
 ## Screenshots
 |                      Function Plotter App                      |                     Function Plot                     |                   Function Subplot                    |
@@ -33,6 +30,10 @@ https://github.com/AhmedHamdi0/Function-Plotter/assets/119865529/c7df1463-0a7a-4
 | <img width="1604"  src="GUI Figures/min greater than max.png"> | <img width="1604"  src="GUI Figures/save image.png">  | <img width="1604"  src="GUI Figures/export pdf.png">  |
 |                            Zoom In                             |                       Zoom Out                        |                       Exit App                        |
 |       <img width="1604"  src="GUI Figures/zoom in.png">        |  <img width="1604"  src="GUI Figures/zoom out.png">   |  <img width="1604"  src="GUI Figures/exit app.png">   |
+
+
+## Demo Video
+[Function Plotter Youtube Link](https://youtu.be/uzY4Gz1nRqU)
 
 ## Project Hierarchy
 ```
